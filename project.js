@@ -30,39 +30,3 @@ function changeColor() {
 }
 
 
-function getImage() {
-  var file = document.querySelector("input[type=file]").files[0];
-
-  var reader = new FileReader();
-
-  let dataURI;
-
-  reader.addEventListener(
-    "load",
-    function() {
-      dataURI = reader.result;
-
-      const img = document.createElement("img");
-      img.src = dataURI;
-      editorContent.appendChild(img);
-    },
-    false
-  );
-
-  if (file) {
-    console.log("s");
-    reader.readAsDataURL(file);
-  }
-}
-
-function printMe() {
-  if (confirm("Double check your content")) {
-    const body = document.body;
-    let s = body.innerHTML;
-    body.textContent = editorContent.innerHTML;
-    body.style.whiteSpace = "pre";
-    my_window = window.open("about:blank", "mywindow1");
-    my_window.document.write(body);
-    
-  }
-}
