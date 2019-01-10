@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <title>WYSIWYG HTML Editor</title>
+    <link rel="stylesheet" href="project.css">
+    <script src="project.js"></script>
+</head>
+<body>
+    <div class="toolbar">
+
+    <button onclick="underline()">Underline</button>
+
+    <button onclick="italic()">Italic</button>
+   
+    <button onclick="bold()">Bold</button>
+        
+    <button onclick="strikeThrough()">Strike</button>
+
+    
+        
+    <button onclick="link()">Link</button>
+    
+    <input class="tool-items fa fa-file-image-o" type="file" accept="image/*" id="file" style="display: none;" onchange="getImage()">
+
+    <label for="file" class="tool-items fa fa-file-image-o">Image</label>
+
+    
+        
+    <button onclick="cut()">Cut</button>
+    
+    <button class="tool-items fa fa-scribd" onclick="document.execCommand('selectAll',false,'')">Select All</button>
+
+    <button class="tool-items fa fa-clone" onclick="copy()">Copy</button>
+
+
+
+    <button onclick="undo()">Undo</button>
+
+    <button onclick="redo()">Redo</button>
+        
+        
+
+    <button class="tool-items fa fa-tint" onclick="changeColor()">Color</button>
+        
+        
+
+    <!-- Justify -->
+
+    <button class="tool-items fa fa-align-center" onclick="document.execCommand('justifyCenter',false,'')">Center</button>
+
+    <button class="tool-items fa fa-align-left" onclick="document.execCommand('justifyLeft',false,'')">Left</button>
+        
+    <button class="tool-items fa fa-align-right" onclick="document.execCommand('justifyRight',false,'')">Right</button>
+        
+  </div>
+    
+    
+    <!-- Make it content editable attribute true so that we can edit inside the div tag and also enable execCommand to edit content inside it.-->
+    <div class="editor" contenteditable="true" spellcheck="false">
+        Add Content here, when you're done click 'Display HTML'. 
+    </div>
+    
+    <div class="codeoutput">
+        <!-- <pre> tags reserves whitespace and newline characters. -->
+        <pre class="htmloutput">
+        </pre>
+    </div>
+    
+    <button onclick="displayhtml()">Display HTML</button>
+    
+</body>
+<script>
+    window.addEventListener("load", function(){
+        //first check if execCommand and contentEditable attribute is supported or not.
+        if(document.contentEditable != undefined && document.execCommand != undefined)
+       {
+           alert("HTML5 Document Editing API Is Not Supported");
+        }
+        else
+        {
+            document.execCommand('styleWithCSS', false, true);
+        }
+    }, false);
+    
+    //underlines the selected text
+    function underline()
+    {
+        document.execCommand("underline", false, null);
+    }
+    
+    //makes the selected text as hyperlink.
+    function link()
+    {
+        var url = prompt("Enter the URL");
+        document.execCommand("createLink", false, url);
+    }
+    
+    //displays HTML of the output
+    function displayhtml()
+    {
+        //set textContent of pre tag to the innerHTML of editable div. textContent can take any form of text and display it as it is without browser interpreting it. It also preserves white space and new line characters.
+        document.getElementsByClassName("htmloutput")[0].textContent = document.getElementsByClassName("editor")[0].innerHTML;
+    }
+</script>
+</html>
