@@ -1,2 +1,3 @@
 # graftonsmith.github.io
-website
+WYSIWYG HTML editor website
+for AP Physics project
